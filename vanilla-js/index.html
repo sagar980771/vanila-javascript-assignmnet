@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="js/main.js">
+</head>
+
+<body>
+
+  <div class="w3-content w3-display-container" id="sliderBox">
+      <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+      <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+    </div>
+  <br>
+
+  <!-- <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div> -->
+
+  <script>
+    (function() {
+      var imageWidth = 500;
+      var imageHeight = 300;
+      var imagesArray = []; 
+      for (var i = 1; i <= 10; i++) {
+        fetch('https://picsum.photos/id/' + i + '/' + imageWidth + '/' + imageHeight)
+          .then(function (response) {
+            var img = document.createElement("img");
+            img.setAttribute('src', response.url);
+            img.classList.add('mySlides');
+            img.style.width="100%";
+            // mySlidesDiv.appendChild(img);
+            document.getElementById('sliderBox').appendChild(img);
+          });
+      }
+    })();
+    var slideIndex = 1;
+    setTimeout(function() {showDivs(slideIndex)}, 1000);
+
+    function plusDivs(n) {
+      showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      if (n > x.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = x.length}
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";  
+      }
+      console.log(document.getElementsByClassName("mySlides"));
+      x[slideIndex-1].style.display = "block";  
+    }
+    
+  </script>
+
+</body>
+
+</html>
